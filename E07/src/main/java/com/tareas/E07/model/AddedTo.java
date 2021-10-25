@@ -15,11 +15,11 @@ public class AddedTo {
     private AddedToPK id = new AddedToPK();
 
     @ManyToOne
-    @JoinColumn(name = "song")
+    @JoinColumn(name = "song") //Falta mapsId con los ide de AddedToPK
     private Song song;
 
     @ManyToOne
-    @JoinColumn(name = "playlist")
+    @JoinColumn(name = "playlist") //Falta mapsId
     private Playlist playlist;
 
     private DateTimeFormat datetime;
