@@ -1,6 +1,8 @@
 package com.tareas.E07.model;
 
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -9,12 +11,14 @@ import java.time.LocalDateTime;
 @Getter @Setter
 @Builder
 @AllArgsConstructor @NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class AddedTo {
 
     @Builder.Default
     @EmbeddedId
     private AddedToPK id = new AddedToPK();
 
+    @CreatedDate
     private LocalDateTime dateTime;
     private int orden;
 

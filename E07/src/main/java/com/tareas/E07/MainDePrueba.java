@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 @Component
@@ -26,6 +27,8 @@ public class MainDePrueba {
 
     @PostConstruct
     public void test(){
+
+        DateTimeFormatter formater = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
         Artist billie = Artist.builder()
                 .name("Billie Ailish").build();
@@ -54,7 +57,9 @@ public class MainDePrueba {
 
         addedToService.save(a);
 
-        System.out.println("Playlist: " + a.getPlaylist().getName()+ "\n Canciones: " + a.getSong().getTitle() + "\n Artista: " + a.getSong().getArtist().getName());
+
+
+        System.out.println("Playlist: " + a.getPlaylist().getName() + " Fecha de creación: " +  a.getDateTime().format(formater) + " Orden: " + a.getOrden() + "\n Canciones: " + a.getSong().getTitle() + "\n Artista: " + a.getSong().getArtist().getName());
     }
 
 }
