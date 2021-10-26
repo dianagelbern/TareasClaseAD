@@ -22,7 +22,8 @@ public class Artist implements Serializable {
 
     private String name;
 
+    @Builder.Default
     @OneToMany(mappedBy = "artist")
-    private List<Playlist>playlists = new ArrayList<>();
+    private List<Song>songs = new ArrayList<>();
 
 }

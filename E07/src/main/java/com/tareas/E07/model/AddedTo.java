@@ -1,9 +1,9 @@
 package com.tareas.E07.model;
 
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter
@@ -11,34 +11,57 @@ import javax.persistence.*;
 @AllArgsConstructor @NoArgsConstructor
 public class AddedTo {
 
+    @Builder.Default
     @EmbeddedId
     private AddedToPK id = new AddedToPK();
 
+    private LocalDateTime dateTime;
+    private int orden;
+
+
+    public AddedTo(LocalDateTime dateTime, int orden) {
+        this.dateTime = dateTime;
+        this.orden = orden;
+    }
+
     @ManyToOne
-    @JoinColumn(name = "song") //Falta mapsId con los ide de AddedToPK
+    @MapsId("song_id")
+    @JoinColumn(name = "song_id")
     private Song song;
 
     @ManyToOne
-    @JoinColumn(name = "playlist") //Falta mapsId
+    @MapsId("playlist_id")
+    @JoinColumn(name = "playlist_id")
     private Playlist playlist;
 
-    private DateTimeFormat datetime;
-    private int order;
-
-    public AddedTo(DateTimeFormat datetime, int order) {
-        this.datetime = datetime;
-        this.order = order;
+    //Helpers
+    public void addToSong(Song s){
+        song = s;
+        s.getAddedTos().add(this);
     }
 
-    public AddedTo(Song song, Playlist playlist, DateTimeFormat datetime, int order) {
-        this.song = song;
-        this.playlist = playlist;
-        this.datetime = datetime;
-        this.order = order;
+    public void removeFromSong(Song s){
+        s.getAddedTos().remove(this);
+        song = null;
     }
 
-    public AddedTo(Song song, Playlist playlist) {
-        this.song = song;
-        this.playlist = playlist;
+    public void addToPlaylist(Playlist p){
+        playlist = p;
+        p.getAddedTos().add(this);
+    }
+
+    public void removeFromPlaylist(Playlist p){
+        p.getAddedTos().remove(this);
+        playlist = null;
+    }
+
+    public void addSongPlaylist(Song s, Playlist p){
+        addToSong(s);
+        addToPlaylist(p);
+    }
+
+    public void removeSongPlaylist(Song s, Playlist p){
+        removeFromSong(s);
+        removeFromPlaylist(p);
     }
 }
