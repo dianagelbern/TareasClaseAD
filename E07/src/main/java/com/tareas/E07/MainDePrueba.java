@@ -36,11 +36,12 @@ public class MainDePrueba {
 
         Song s = Song.builder()
                 .title("You Should See Me in a Crown")
-                .artist(billie)
                 .album("When We All Fall Asleep, Where Do We Go?")
                 .year("2018")
                 .build();
+        s.addArtist(billie);
         songService.save(s);
+
 
         Playlist p = Playlist.builder()
                 .name("Música de día de llueve")

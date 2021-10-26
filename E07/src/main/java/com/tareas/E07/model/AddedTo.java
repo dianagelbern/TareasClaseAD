@@ -59,13 +59,4 @@ public class AddedTo {
         playlist = null;
     }
 
-    public void addSongPlaylist(Song s, Playlist p){
-        addToSong(s);
-        addToPlaylist(p);
-    }
-
-    public void removeSongPlaylist(Song s, Playlist p){
-        removeFromSong(s);
-        removeFromPlaylist(p);
-    }
 }
