@@ -14,7 +14,7 @@ import java.util.List;
 public class Song implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
