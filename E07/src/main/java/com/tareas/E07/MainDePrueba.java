@@ -44,8 +44,8 @@ public class MainDePrueba {
 
 
         Playlist p = Playlist.builder()
-                .name("Música de día de llueve")
-                .description("Cuando perfecta para cuando llueve con un chocolate calentito")
+                .name("Autumn chill")
+                .description("Perfecta para un diá de lluvia estudiando")
                 .build();
         playlistService.save(p);
 
