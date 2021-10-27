@@ -34,6 +34,7 @@ public class AddedTo {
     private Song song;
 
     @ManyToOne
+    //Esta mapeada con playlist_id de addToPk para no generar una columna nueva detro de la tabla sino relacionarla
     @MapsId("playlist_id")
     @JoinColumn(name = "playlist_id")
     private Playlist playlist;

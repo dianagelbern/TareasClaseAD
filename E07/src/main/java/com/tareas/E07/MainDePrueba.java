@@ -9,6 +9,7 @@ import com.tareas.E07.service.ArtistService;
 import com.tareas.E07.service.PlaylistService;
 import com.tareas.E07.service.SongService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 
 @Component
 @RequiredArgsConstructor
+@EnableJpaAuditing
 public class MainDePrueba {
 
     private final SongService songService;
