@@ -1,24 +1,25 @@
 package com.ejercicio.E08.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 //Justificación:
 /*
-Según a mi entender, ya que existen dos tipos de clientes (corporativo e individual) y ambos engloban los
-tipos de clientes que se pueden tener no es necesario hacer que cliente per se genere una tabla para si misma
+Ya que tiene una clase que depende de ella (pedido) no puede ser abstracta ya que no nos generaría
+tabla la cual necesitamos
 
  */
-@MappedSuperclass
+@Inheritance(strategy = InheritanceType.JOINED)
 @Getter @Setter
+@AllArgsConstructor @NoArgsConstructor
 @SuperBuilder
-public abstract class Cliente implements Serializable {
+@Entity
+public class Cliente implements Serializable {
 
     @Id
     @GeneratedValue
@@ -27,5 +28,21 @@ public abstract class Cliente implements Serializable {
     private String nombre;
     private String direccion;
     private String codigoPostal;
+    private int codCliente;
+    private String telefono;
+
+    @Builder.Default
+    @OneToMany(mappedBy = "cliente")
+    private List<Pedido> pedidos = new ArrayList<>();
+
+
+    public Cliente(String nombre, String direccion, String codigoPostal, int codCliente, String telefono) {
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.codigoPostal = codigoPostal;
+        this.codCliente = codCliente;
+        this.telefono = telefono;
+    }
+
 
 }
